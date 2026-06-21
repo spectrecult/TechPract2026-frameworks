@@ -1,0 +1,132 @@
+{
+  "info": {
+    "name": "Symfony Genre API",
+    "description": "REST API для управління сутністю Genre (Жанр) у фреймворку Symfony з використанням Doctrine ORM та SQLite.\n\nБазовий URL: http://127.0.0.1:8000/api/genres\n\nСутність Genre має поля:\n- id (integer, генерується автоматично)\n- name (string, обов'язкове поле)\n- description (text, необов'язкове поле)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000",
+      "type": "string"
+    },
+    {
+      "key": "genre_id",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Get All Genres",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/genres",
+          "host": ["{{base_url}}"],
+          "path": ["api", "genres"]
+        },
+        "description": "Повертає список усіх жанрів у форматі JSON."
+      },
+      "response": []
+    },
+    {
+      "name": "Get Genre by ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/genres/{{genre_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "genres", "{{genre_id}}"]
+        },
+        "description": "Повертає один жанр за заданим id. Якщо жанр не знайдено, повертає 404 з повідомленням про помилку."
+      },
+      "response": []
+    },
+    {
+      "name": "Create Genre",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Fantasy\",\n    \"description\": \"Science fiction and fantasy literature genre\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/genres",
+          "host": ["{{base_url}}"],
+          "path": ["api", "genres"]
+        },
+        "description": "Створює новий жанр. Поле 'name' є обов'язковим, поле 'description' - необов'язкове. У разі успіху повертає 201 Created зі створеним обʼєктом."
+      },
+      "response": []
+    },
+    {
+      "name": "Update Genre (Partial)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"description\": \"Updated genre description\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/genres/{{genre_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "genres", "{{genre_id}}"]
+        },
+        "description": "Частково оновлює жанр за id. Можна передати лише одне з полів (name або description) - інше залишиться без змін. Якщо жанр не знайдено, повертає 404."
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Genre",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/genres/{{genre_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "genres", "{{genre_id}}"]
+        },
+        "description": "Видаляє жанр за id. У разі успіху повертає повідомлення про підтвердження видалення. Якщо жанр не знайдено, повертає 404."
+      },
+      "response": []
+    }
+  ]
+}
